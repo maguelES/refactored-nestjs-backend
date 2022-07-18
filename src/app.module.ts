@@ -10,7 +10,6 @@ import typeorm from '../config/typeorm';
     ConfigModule.forRoot({
       load: [configuration],
     }),
-    typeorm,
   ],
   controllers: [AppController],
   providers: [AppService],
