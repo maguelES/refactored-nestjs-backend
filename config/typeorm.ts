@@ -1,4 +1,6 @@
-export default () => ({
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+export default TypeOrmModule.forRoot({
   host: 'localhost:5432',
   type: 'postgres',
   port: 5432,
