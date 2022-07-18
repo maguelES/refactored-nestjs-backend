@@ -3,12 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import databaseConfig from '../config/database';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [configuration],
     }),
+    TypeOrmModule.forRoot({ ...databaseConfig }),
   ],
   controllers: [AppController],
   providers: [AppService],
