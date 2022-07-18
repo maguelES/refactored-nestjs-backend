@@ -11,7 +11,9 @@ export class AppController {
   }
 
   @Get('hehe')
-  getHehe(): string {
-    return 'Hello Hehe!';
+  getHehe(): object {
+    return {
+      name: 'ayam',
+    };
   }
 }
