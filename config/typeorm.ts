@@ -5,7 +5,7 @@ export default TypeOrmModule.forRoot({
   type: 'postgres',
   port: 5432,
   username: process.env.DATABASE_USER ?? 'username',
-  password: process.env.PASSWORD ?? 'test',
-  database: process.env.DATABASE ?? 'db',
+  password: process.env.DATBASE_PASSWORD ?? 'test',
+  database: process.env.DATABASE_SCHEMA ?? 'db',
   synchronize: true,
 });
