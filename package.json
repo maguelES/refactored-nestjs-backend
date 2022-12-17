@@ -20,7 +20,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:create": "npm run typeorm -- -- migration:create",
+    "migration:create": "npm run typeorm -- migration:create",
     "migration:run": "npm run typeorm -- --dataSource=config/typeorm/datasource.ts migration:run",
     "migration:generate": "npm run typeorm -- --dataSource=config/typeorm/datasource.ts migration:generate config/typeorm/datasource.ts",
     "migration:revert": "npm run typeorm -- --dataSource=config/typeorm/datasource.ts migration:revert"
