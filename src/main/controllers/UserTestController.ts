@@ -1,8 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
-@Controller()
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../model/User';
+import { Repository } from 'typeorm';
+@Controller('user/test')
 export class UserTestController {
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
+
   @Get()
   public findAll(): any {
-    return '';
+    return this.usersRepository.find();
   }
 }

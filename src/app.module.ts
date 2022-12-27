@@ -4,12 +4,14 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
 import typeorm from '../config/typeorm/typeorm';
+import { MainModule } from './main/MainModule';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [configuration],
     }),
+    MainModule,
     typeorm,
   ],
   controllers: [AppController],
