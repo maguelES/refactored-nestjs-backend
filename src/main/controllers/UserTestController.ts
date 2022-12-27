@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../model/User';
+import { User } from '../model/User.entity';
 import { Repository } from 'typeorm';
 @Controller('user/test')
 export class UserTestController {
