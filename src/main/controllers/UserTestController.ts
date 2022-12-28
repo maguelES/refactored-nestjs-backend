@@ -2,6 +2,8 @@ import { Controller, Get } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../model/User.entity';
 import { Repository } from 'typeorm';
+import { UserCommonTransformer } from '../data/transformers/user-common.transformer';
+
 @Controller('user/test')
 export class UserTestController {
   constructor(
@@ -10,7 +12,9 @@ export class UserTestController {
   ) {}
 
   @Get()
-  public findAll(): any {
-    return this.usersRepository.find();
+  async findAll(): Promise<any> {
+    const users = await this.usersRepository.find();
+
+    return users.map((value) => new UserCommonTransformer().from(value));
   }
 }
