@@ -1,8 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../model/User.entity';
 import { Repository } from 'typeorm';
 import { UserCommonTransformer } from '../data/transformers/user-common.transformer';
+import { UserRegistrationForm } from '../data/transfers/user-registration.form';
 
 @Controller('user/test')
 export class UserTestController {
@@ -16,5 +17,16 @@ export class UserTestController {
     const users = await this.usersRepository.find();
 
     return users.map((user) => new UserCommonTransformer().from(user));
+  }
+
+  @Post()
+  async create(@Body() form: UserRegistrationForm) {
+    console.debug('Creating new user ', form);
+
+    const user = new User();
+    user.firstName = form.first_name;
+    user.lastName = form.last_name;
+
+    await this.usersRepository.create(user);
   }
 }
