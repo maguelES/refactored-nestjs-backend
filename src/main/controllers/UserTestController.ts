@@ -15,6 +15,6 @@ export class UserTestController {
   async findAll(): Promise<any> {
     const users = await this.usersRepository.find();
 
-    return users.map((value) => new UserCommonTransformer().from(value));
+    return users.map((user) => new UserCommonTransformer().from(user));
   }
 }
