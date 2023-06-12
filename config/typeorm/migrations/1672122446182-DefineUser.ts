@@ -24,14 +24,17 @@ export class DefineUser1672122446182 implements MigrationInterface {
           {
             name: 'created_at',
             type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
           },
           {
             name: 'deleted_at',
             type: 'timestamp',
+            isNullable: true,
           },
           {
             name: 'updated_at',
             type: 'timestamp',
+            isNullable: true,
           },
         ],
       }),
