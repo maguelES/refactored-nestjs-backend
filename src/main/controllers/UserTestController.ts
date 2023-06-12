@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../model/User.entity';
-import { Repository } from 'typeorm';
+import { ILike, Like, Repository } from 'typeorm';
 import { UserCommonTransformer } from '../data/transformers/user-common.transformer';
 import { UserRegistrationForm } from '../data/transfers/user-registration.form';
 
@@ -19,10 +19,19 @@ export class UserTestController {
     return users.map((user) => new UserCommonTransformer().from(user));
   }
 
-  @Get('first_name')
+  @Get('/find/first_name')
   async findByFirstName(@Query('find') name): Promise<any> {
     const users = await this.usersRepository.findBy({
       firstName: name,
+    });
+
+    return users.map((user) => new UserCommonTransformer().from(user));
+  }
+
+  @Get('/like/first_name')
+  async findLikeFirstName(@Query('find') name): Promise<any> {
+    const users = await this.usersRepository.findBy({
+      firstName: ILike('%' + name + '%'),
     });
 
     return users.map((user) => new UserCommonTransformer().from(user));
