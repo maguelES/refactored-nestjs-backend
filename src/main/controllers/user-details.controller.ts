@@ -20,4 +20,15 @@ export class UserDetailsController {
 
     return dtls;
   }
+
+  @Get('selective')
+  async findAllSelective(): Promise<any> {
+    const dtls = await this.userDetailsRepository
+      .createQueryBuilder('d')
+      .select(['d.id', 'd.user_id'])
+      .leftJoin('d.user', 'user')
+      .getMany();
+
+    return dtls;
+  }
 }
