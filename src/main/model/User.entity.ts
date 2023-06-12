@@ -1,5 +1,4 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { UserDetails } from './user-details.entity';
 
 @Entity('user')
 export class User {
@@ -12,6 +11,6 @@ export class User {
   @Column({ name: 'last_name' })
   lastName: string;
 
-  @OneToOne(() => UserDetails, (details) => details.user)
-  userDetails: UserDetails;
+  // @OneToOne(() => UserDetails, (details) => details.user)
+  // userDetails: UserDetails;
 }
