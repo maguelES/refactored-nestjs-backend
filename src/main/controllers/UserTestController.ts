@@ -19,6 +19,15 @@ export class UserTestController {
     return users.map((user) => new UserCommonTransformer().from(user));
   }
 
+  @Get('first_name')
+  async findByFirstName(): Promise<any> {
+    const users = await this.usersRepository.findBy({
+      firstName: 'Hehe',
+    });
+
+    return users.map((user) => new UserCommonTransformer().from(user));
+  }
+
   @Post()
   async create(@Body() form: UserRegistrationForm) {
     console.debug('Creating new user ', form.first_name);
