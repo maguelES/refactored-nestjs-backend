@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../model/User.entity';
 import { Repository } from 'typeorm';
@@ -20,9 +20,9 @@ export class UserTestController {
   }
 
   @Get('first_name')
-  async findByFirstName(): Promise<any> {
+  async findByFirstName(@Query('find') name): Promise<any> {
     const users = await this.usersRepository.findBy({
-      firstName: 'Hehe',
+      firstName: name,
     });
 
     return users.map((user) => new UserCommonTransformer().from(user));
