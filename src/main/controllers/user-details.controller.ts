@@ -12,7 +12,11 @@ export class UserDetailsController {
 
   @Get()
   async findAll(): Promise<any> {
-    const dtls = await this.userDetailsRepository.find();
+    const dtls = await this.userDetailsRepository.find({
+      relations: {
+        user: true,
+      },
+    });
 
     return dtls;
   }
