@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../model/User.entity';
 import { ILike, Like, Repository } from 'typeorm';
 import { UserCommonTransformer } from '../data/transformers/user-common.transformer';
 import { UserRegistrationForm } from '../data/transfers/user-registration.form';
+import { User } from '../model/user.entity';
 
 @Controller('user/test')
 export class UserTestController {

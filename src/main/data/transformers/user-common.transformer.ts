@@ -1,4 +1,4 @@
-import { User } from '../../model/User.entity';
+import { User } from '../../model/user.entity';
 import { UserCommonDto } from '../transfers/user-common.dto';
 
 export class UserCommonTransformer {
