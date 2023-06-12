@@ -1,5 +1,4 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { JoinColumn } from 'typeorm/browser';
 import { UserDetails } from './user-details.entity';
 
 @Entity('user')
@@ -13,7 +12,6 @@ export class User {
   @Column({ name: 'last_name' })
   lastName: string;
 
-  @OneToOne(() => UserDetails)
-  @JoinColumn()
+  @OneToOne(() => UserDetails, (details) => details.user)
   userDetails: UserDetails;
 }
