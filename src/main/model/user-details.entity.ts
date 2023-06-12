@@ -5,6 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { User } from './user.entity';
 @Entity('user_details')
 export class UserDetails {
   @PrimaryGeneratedColumn()
@@ -16,7 +17,7 @@ export class UserDetails {
   @Column({ name: 'gender' })
   gender: string;
 
-  // @OneToOne(() => User, (user) => user.userDetails)
-  // @JoinColumn()
-  // user: User;
+  @OneToOne(() => User, (user) => user.userDetails)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }
