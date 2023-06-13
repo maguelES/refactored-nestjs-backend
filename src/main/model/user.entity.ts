@@ -10,7 +10,7 @@ import {
 import { UserDetails } from './user-details.entity';
 
 @Entity('user')
-export class User extends BaseEntity {
+export class User {
   @PrimaryGeneratedColumn()
   id: bigint;
 
