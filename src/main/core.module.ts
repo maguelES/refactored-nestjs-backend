@@ -10,4 +10,4 @@ import { UserDetails } from './model/user-details.entity';
   providers: [],
   controllers: [UserTestController, UserDetailsController],
 })
-export class MainModule {}
+export class CoreModule {}
