@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
 import databaseConfig from '../config/database.config';
-import { MainModule } from './main/MainModule';
+import { CoreModule } from './main/core.module';
 import { TypeOrmService } from '../config/typeorm/type.orm.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
@@ -22,7 +22,7 @@ import { DataSource } from 'typeorm';
         return dataSource;
       },
     }),
-    MainModule,
+    CoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
