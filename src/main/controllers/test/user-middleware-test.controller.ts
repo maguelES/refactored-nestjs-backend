@@ -13,6 +13,9 @@ export class UserMiddlewareTestController {
   @Get()
   async findAll(): Promise<any> {
     console.debug('Testing Middleware in User');
-    return null;
+    return {
+      data: 1,
+      message: 'All OK',
+    };
   }
 }
