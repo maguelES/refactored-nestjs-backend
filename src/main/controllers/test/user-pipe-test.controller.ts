@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../model/user.entity';
 import { Repository } from 'typeorm';
@@ -18,6 +25,14 @@ export class UserPipeTestController {
   @Get('single')
   async findOne(): Promise<any> {
     return null;
+  }
+  @Get('id')
+  async findOneById(@Query('id', ParseIntPipe) id: bigint): Promise<any> {
+    return this.userRepository.find({
+      where: {
+        id: id,
+      },
+    });
   }
 
   @Post()
