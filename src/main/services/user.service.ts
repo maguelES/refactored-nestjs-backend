@@ -11,7 +11,7 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  create(form: UserRegistrationForm) {
+  create(form: UserRegistrationForm): Promise<User> {
     return this.userRepository.save(form.toEntity());
   }
 }
