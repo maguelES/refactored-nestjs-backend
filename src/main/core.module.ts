@@ -7,10 +7,11 @@ import { UserDetails } from './model/user-details.entity';
 import { UserPipeTestController } from './controllers/test/user-pipe-test.controller';
 import { UserMiddlewareTestController } from './controllers/test/user-middleware-test.controller';
 import { LoggerMiddleware } from './http/middleware/logger.middleware';
+import { UserService } from './services/user.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserDetails, User])],
-  providers: [],
+  providers: [UserService],
   controllers: [
     UserTestController,
     UserDetailsController,
