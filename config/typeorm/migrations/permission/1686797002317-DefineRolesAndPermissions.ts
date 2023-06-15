@@ -106,18 +106,18 @@ export class DefineRolesAndPermissions1686797002317
           },
         ],
         foreignKeys: [
-          new TableForeignKey({
+          {
             columnNames: ['permission_id'],
             referencedColumnNames: ['id'],
             referencedTableName: 'permission',
             onDelete: 'CASCADE',
-          }),
-          new TableForeignKey({
+          },
+          {
             columnNames: ['role_id'],
             referencedColumnNames: ['id'],
             referencedTableName: 'role',
             onDelete: 'CASCADE',
-          }),
+          },
         ],
       }),
     );
