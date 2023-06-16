@@ -9,13 +9,11 @@ export class UserRegistrationForm {
 
   password: string;
 
-  toEntity?(): User {
+  toEntity(): User {
     return {
       id: null,
       firstName: this.firstName,
       lastName: this.lastName,
-      createdAt: null,
-      updatedAt: null,
     };
   }
 }
