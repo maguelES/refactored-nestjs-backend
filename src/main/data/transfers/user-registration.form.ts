@@ -12,8 +12,6 @@ export class UserRegistrationForm {
       lastName: this.last_name,
       createdAt: null,
       updatedAt: null,
-      userDetails: null,
-      login: null,
     };
   }
 }
