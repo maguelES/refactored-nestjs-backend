@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserDetails } from './user-details.entity';
+import { UserLoginEntity } from './user-login.entity';
 
 @Entity('user')
 export class User {
@@ -22,6 +23,9 @@ export class User {
 
   @OneToOne(() => UserDetails, (details) => details.user)
   userDetails: UserDetails;
+
+  @OneToOne(() => UserLoginEntity, (login) => login.user)
+  login: UserLoginEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

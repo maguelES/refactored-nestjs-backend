@@ -13,6 +13,7 @@ export class UserRegistrationForm {
       createdAt: null,
       updatedAt: null,
       userDetails: null,
+      login: null,
     };
   }
 }
