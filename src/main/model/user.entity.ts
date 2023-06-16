@@ -22,10 +22,10 @@ export class User {
   lastName: string;
 
   @OneToOne(() => UserDetails, (details) => details.user)
-  userDetails: UserDetails;
+  userDetails?: UserDetails;
 
   @OneToOne(() => UserLoginEntity, (login) => login.user)
-  login: UserLoginEntity;
+  login?: UserLoginEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
