@@ -8,14 +8,17 @@ import {
 import { User } from './user.entity';
 
 @Entity('user_login')
-export class UserLoginEntity {
+export class UserLogin {
   @PrimaryGeneratedColumn()
   id: bigint;
 
+  @Column()
   password: string;
 
+  @Column()
   username: string;
 
+  @Column()
   email: string;
 
   @OneToOne(() => User, (user) => user.login)
