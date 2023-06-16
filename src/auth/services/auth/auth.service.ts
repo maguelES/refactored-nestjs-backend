@@ -7,7 +7,7 @@ import { UserRegistrationForm } from '../../../main/data/transfers/user-registra
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userservice: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
   async register(form: AuthRegistrationForm): Promise<void> {
     const hash = crypto
@@ -25,7 +25,7 @@ export class AuthService {
     userForm.email = form.email;
 
     console.debug(userForm);
-    await this.userservice.create(userForm);
+    await this.userService.create(userForm);
 
     return null;
   }
