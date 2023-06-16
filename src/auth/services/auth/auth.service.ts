@@ -27,6 +27,9 @@ export class AuthService {
     const salt = await bcrypt.genSalt();
     userForm.password = await bcrypt.hash(form.password, salt);
 
+    const isMatch = await bcrypt.compare(form.password, userForm.password);
+    console.debug(isMatch);
+
     console.debug(userForm);
     await this.userService.create(userForm);
 
