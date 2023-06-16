@@ -39,11 +39,11 @@ export class UserTestController {
 
   @Post()
   async create(@Body() form: UserRegistrationForm) {
-    console.debug('Creating new user ', form.first_name);
+    console.debug('Creating new user ', form.firstName);
 
     const user = new User();
-    user.firstName = form.first_name;
-    user.lastName = form.last_name;
+    user.firstName = form.firstName;
+    user.lastName = form.lastName;
 
     await this.usersRepository.save(user);
   }
