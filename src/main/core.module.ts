@@ -13,6 +13,7 @@ import { UserLoginEntity } from './model/user-login.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([UserDetails, User, UserLoginEntity])],
   providers: [UserService],
+  exports: [UserService],
   controllers: [
     UserTestController,
     UserDetailsController,
