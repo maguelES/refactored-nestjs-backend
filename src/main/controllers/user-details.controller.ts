@@ -18,6 +18,8 @@ export class UserDetailsController {
       },
     });
 
+    console.debug('Dtls', dtls);
+
     return dtls;
   }
 

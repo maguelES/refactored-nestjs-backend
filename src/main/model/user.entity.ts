@@ -8,9 +8,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserDetails } from './user-details.entity';
+import { UserLoginEntity } from './user-login.entity';
 
 @Entity('user')
-export class User extends BaseEntity {
+export class User {
   @PrimaryGeneratedColumn()
   id: bigint;
 
@@ -21,11 +22,14 @@ export class User extends BaseEntity {
   lastName: string;
 
   @OneToOne(() => UserDetails, (details) => details.user)
-  userDetails: UserDetails;
+  userDetails?: UserDetails;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @OneToOne(() => UserLoginEntity, (login) => login.user)
+  login?: UserLoginEntity;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt?: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt?: Date;
 }

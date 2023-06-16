@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Like, Repository } from 'typeorm';
-import { UserCommonTransformer } from '../data/transformers/user-common.transformer';
-import { UserRegistrationForm } from '../data/transfers/user-registration.form';
-import { User } from '../model/user.entity';
+import { UserCommonTransformer } from '../../data/transformers/user-common.transformer';
+import { UserRegistrationForm } from '../../data/transfers/user-registration.form';
+import { User } from '../../model/user.entity';
 
 @Controller('user/test')
 export class UserTestController {
@@ -39,11 +39,11 @@ export class UserTestController {
 
   @Post()
   async create(@Body() form: UserRegistrationForm) {
-    console.debug('Creating new user ', form.first_name);
+    console.debug('Creating new user ', form.firstName);
 
     const user = new User();
-    user.firstName = form.first_name;
-    user.lastName = form.last_name;
+    user.firstName = form.firstName;
+    user.lastName = form.lastName;
 
     await this.usersRepository.save(user);
   }
