@@ -3,7 +3,7 @@ import { AuthRegistrationForm } from '../../data/transfers/auth-registration.for
 import { AuthService } from '../../services/auth/auth.service';
 
 @Controller('auth')
-export class AuthController {
+export class AuthRegisterController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
