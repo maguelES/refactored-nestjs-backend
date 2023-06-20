@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../../../main/services/user.service';
 import { AuthRegistrationForm } from '../../data/transfers/auth-registration.form';
-import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
-import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
 import { UserRegistrationForm } from '../../../main/data/transfers/user-registration.form';
 import { User } from '../../../main/model/user.entity';
+import { AuthLoginForm } from '../../data/transfers/auth-login-form/auth-login-form';
 
 @Injectable()
 export class AuthService {
@@ -24,5 +23,10 @@ export class AuthService {
     console.debug(isMatch);
 
     return await this.userService.create(userForm);
+  }
+
+  async login(form: AuthLoginForm): Promise<number> {
+    await this.userService.verifyUser(form.username, form.password);
+    return 1;
   }
 }

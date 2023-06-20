@@ -11,6 +11,6 @@ export class AuthLoginController {
     @Body(new ValidationPipe()) form: AuthLoginForm,
   ): Promise<void> {
     console.debug(form);
-    await this.authService.register(form);
+    await this.authService.login(form);
   }
 }
