@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../model/user.entity';
 import { UserRegistrationForm } from '../data/transfers/user-registration.form';
 import { UserLogin } from '../model/user-login.entity';
-import * as bcrypt from 'bcrypt';
+import { FindOptionsWhere } from 'typeorm/find-options/FindOptionsWhere';
 
 @Injectable()
 export class UserService {
@@ -32,17 +32,12 @@ export class UserService {
     return user;
   }
 
-  async verifyUser(username: string, password: string): Promise<User> {
-    const login = await this.loginRepository.findOne({
-      where: { username: username },
+  async findOneByLogin(
+    fields: FindOptionsWhere<UserLogin>,
+  ): Promise<UserLogin> {
+    return await this.loginRepository.findOne({
+      where: fields,
       relations: { user: true },
     });
-
-    console.debug('Compare user ', login);
-
-    const isMatch = await bcrypt.compare(password, login.password);
-    console.debug(isMatch);
-
-    return login.user;
   }
 }
