@@ -16,9 +16,6 @@ export class AuthService {
       .update(randomStringGenerator())
       .digest('hex');
 
-    console.debug(hash);
-    console.debug('Auth Form', form);
-
     const userForm = new UserRegistrationForm();
     userForm.firstName = form.firstName;
     userForm.lastName = form.lastName;
@@ -29,8 +26,6 @@ export class AuthService {
 
     const isMatch = await bcrypt.compare(form.password, userForm.password);
     console.debug(isMatch);
-
-    console.debug(userForm);
     await this.userService.create(userForm);
 
     return null;
