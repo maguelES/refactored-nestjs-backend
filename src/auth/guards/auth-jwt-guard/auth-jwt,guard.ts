@@ -7,6 +7,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthJwtGuard implements CanActivate {
@@ -29,6 +30,9 @@ export class AuthJwtGuard implements CanActivate {
       req['user'] = payload;
     } catch (exception) {
       console.error(exception);
+
+      if (exception instanceof jwt.TokenExpiredError)
+        throw new UnauthorizedException('Token Expired');
 
       throw new UnauthorizedException('Cannot verify token');
     }
