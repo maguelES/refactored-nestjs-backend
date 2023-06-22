@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserService } from '../../../main/services/user.service';
 import { AuthRegistrationForm } from '../../data/transfers/auth-registration.form';
 import * as bcrypt from 'bcrypt';
@@ -34,10 +39,16 @@ export class AuthService {
     const login = await this.userService.findOneByLogin({
       username: form.username,
     });
-    console.debug('Compare user ', login);
 
-    const isMatch = await bcrypt.compare(form.password, login.password);
+    if (login == null) throw new BadRequestException('User does not exist');
+
+    let isMatch = false;
+    if (login?.password)
+      isMatch = await bcrypt.compare(form.password, login?.password);
     console.debug(isMatch);
+
+    if (!isMatch)
+      throw new UnauthorizedException('Username or Password does not match');
 
     return {
       token: this.jwtService.sign({
