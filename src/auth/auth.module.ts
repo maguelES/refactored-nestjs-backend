@@ -5,9 +5,15 @@ import { CoreModule } from '../main/core.module';
 import { AuthLoginController } from './controllers/auth-login/auth-login.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthGuardTestController } from './controllers/auth-guard-test/auth-guard-test.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserDetails } from '../main/model/user-details.entity';
+import { User } from '../main/model/user.entity';
+import { UserLogin } from '../main/model/user-login.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([UserDetails, User, UserLogin]),
     CoreModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -20,7 +26,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
     }),
   ],
-  controllers: [AuthRegisterController, AuthLoginController],
+  controllers: [
+    AuthRegisterController,
+    AuthLoginController,
+    AuthGuardTestController,
+  ],
   providers: [AuthService],
 })
 export class AuthModule {}
