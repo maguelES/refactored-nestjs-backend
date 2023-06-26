@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
 import databaseConfig from '../config/database.config';
+import authConfig from '../config/auth.config';
 import { CoreModule } from './main/core.module';
 import { TypeOrmService } from '../config/typeorm/type.orm.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -14,7 +15,7 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration, databaseConfig],
+      load: [configuration, databaseConfig, authConfig],
     }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmService,

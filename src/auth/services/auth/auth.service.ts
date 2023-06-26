@@ -1,32 +1,66 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserService } from '../../../main/services/user.service';
 import { AuthRegistrationForm } from '../../data/transfers/auth-registration.form';
-import * as crypto from 'crypto';
-import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
+import * as bcrypt from 'bcrypt';
 import { UserRegistrationForm } from '../../../main/data/transfers/user-registration.form';
+import { User } from '../../../main/model/user.entity';
+import { AuthLoginForm } from '../../data/transfers/auth-login-form/auth-login-form';
+import { JwtService } from '@nestjs/jwt';
+import { JwtLoginResponse } from '../../data/transfers/jwt-login-response/jwt-login-response';
+import * as ms from 'ms';
+import * as dayjs from 'dayjs';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userservice: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+  ) {}
 
-  async register(form: AuthRegistrationForm): Promise<void> {
-    const hash = crypto
-      .createHash('sha256')
-      .update(randomStringGenerator())
-      .digest('hex');
-
-    console.debug(hash);
-    console.debug('Auth Form', form);
-
+  async register(form: AuthRegistrationForm): Promise<User> {
     const userForm = new UserRegistrationForm();
     userForm.firstName = form.firstName;
     userForm.lastName = form.lastName;
-    userForm.password = form.password;
     userForm.email = form.email;
 
-    console.debug(userForm);
-    await this.userservice.create(userForm);
+    const salt = await bcrypt.genSalt();
+    userForm.password = await bcrypt.hash(form.password, salt);
 
-    return null;
+    const isMatch = await bcrypt.compare(form.password, userForm.password);
+    console.debug(isMatch);
+
+    return await this.userService.create(userForm);
+  }
+
+  async login(form: AuthLoginForm): Promise<JwtLoginResponse> {
+    const login = await this.userService.findOneByLogin({
+      username: form.username,
+    });
+
+    if (login == null) throw new BadRequestException('User does not exist');
+
+    let isMatch = false;
+    if (login?.password)
+      isMatch = await bcrypt.compare(form.password, login?.password);
+    console.debug(isMatch);
+
+    if (!isMatch)
+      throw new UnauthorizedException('Username or Password does not match');
+
+    return {
+      token: this.jwtService.sign({
+        id: login.user.id,
+        role: 'member',
+      }),
+      expiresAt: dayjs()
+        .add(ms(this.configService.get('auth.expires'), 'ms'))
+        .format(),
+    };
   }
 }

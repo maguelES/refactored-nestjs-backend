@@ -8,10 +8,10 @@ import { UserPipeTestController } from './controllers/test/user-pipe-test.contro
 import { UserMiddlewareTestController } from './controllers/test/user-middleware-test.controller';
 import { LoggerMiddleware } from './http/middleware/logger.middleware';
 import { UserService } from './services/user.service';
-import { UserLoginEntity } from './model/user-login.entity';
+import { UserLogin } from './model/user-login.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserDetails, User, UserLoginEntity])],
+  imports: [TypeOrmModule.forFeature([UserDetails, User, UserLogin])],
   providers: [UserService],
   exports: [UserService],
   controllers: [
