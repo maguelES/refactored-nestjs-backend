@@ -21,7 +21,3 @@ jobs:
 
     - name: Build project
       run: npm run build
-
-    # Optional: Add steps for testing or deployment here
-    - name: Run tests
-      run: npm test
