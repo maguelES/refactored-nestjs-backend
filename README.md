@@ -47,6 +47,16 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Running Migration
+
+```bash
+# Install TypeORM globally
+$ npm i -g typeorm
+
+# TypeORM Migration Run
+$ dotenv -e .env -- npm run typeorm migration:run -- --dataSource config/typeorm/datasource.ts
+```
+
 ## Test
 
 ```bash

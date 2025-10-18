@@ -20,7 +20,6 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
       entities: [__dirname + '/../../src/**/*.entity{.ts,.js}'],
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       dropSchema: false,
-      keepConnectionAlive: true,
       logging: this.configService.get('app.nodeEnv') !== 'production',
       extra: {
         max: this.configService.get('database.maxConnections'),
