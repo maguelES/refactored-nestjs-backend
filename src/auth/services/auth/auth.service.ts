@@ -11,7 +11,6 @@ import { User } from '../../../main/model/user.entity';
 import { AuthLoginForm } from '../../data/transfers/auth-login-form/auth-login-form';
 import { JwtService } from '@nestjs/jwt';
 import { JwtLoginResponse } from '../../data/transfers/jwt-login-response/jwt-login-response';
-import * as ms from 'ms';
 import * as dayjs from 'dayjs';
 import { ConfigService } from '@nestjs/config';
 
