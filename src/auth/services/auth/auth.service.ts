@@ -53,12 +53,17 @@ export class AuthService {
     if (!isMatch)
       throw new UnauthorizedException('Username or Password does not match');
 
+    let auth = this.configService.get('auth.expires', 7);
+    console.debug("Auth", auth)
+
     return {
       token: this.jwtService.sign({
         id: login.user.id,
         role: 'member',
       }),
-      expiresAt: dayjs().add(this.configService.get('auth.expires')).format(),
+      expiresAt: dayjs()
+        .add(auth, 'day')
+        .format(),
     };
   }
 }
