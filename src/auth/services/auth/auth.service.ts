@@ -58,9 +58,7 @@ export class AuthService {
         id: login.user.id,
         role: 'member',
       }),
-      expiresAt: dayjs()
-        .add(ms(this.configService.get('auth.expires'), 'ms'))
-        .format(),
+      expiresAt: dayjs().add(this.configService.get('auth.expires')).format(),
     };
   }
 }
